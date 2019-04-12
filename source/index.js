@@ -1,39 +1,111 @@
+import Pigeon from './pigeon';
+import Rat from './rat';
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
+    const luckyRat = new Rat(canvas, ctx);
 
-    let rightPressed = false;
-    let leftPressed = false;
+    let level = 1;
+    let lastLevel = 13;
+    let timer = 30;
+    let pizzaLives = 3;
+    let pizzaScore = 0;
+    
 
-    document.addEventListener('keydown', keyDownHandler, false);
-    document.addEventListener('keyup', keyUpHandler, false);
-    document.addEventListener("mousemove", mouseMoveHandler, false);
+    const pigeonStartingPositions = [
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 120,
+            pigeonTopY: 100
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 140,
+            pigeonTopY: 120
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 160,
+            pigeonTopY: 140
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 170,
+            pigeonTopY: 150
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 200,
+            pigeonTopY: 180
+            
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 80,
+            pigeonTopY: 60
 
-    const ratGirth = 30;
-    let ratX = (canvas.width - ratGirth)/2;
-    let ratY = (canvas.height - ratGirth);
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 180,
+            pigeonTopY: 160
 
-    function keyDownHandler(e) {
-        if (e.key == 'Right' || e.key == 'ArrowRight') {
-            rightPressed = true;
-        } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-            leftPressed = true;
-        }
+        },
+
+    ];
+
+    document.addEventListener('keydown', luckyRat.keyDownHandler, false);
+    document.addEventListener('keyup', luckyRat.keyUpHandler, false);
+    document.addEventListener("mousemove", luckyRat.mouseMoveHandler, false);
+
+    function drawLevel() {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Level ' + level, 8, 20);
     }
 
-    function keyUpHandler(e) {
-        if (e.key == 'Right' || e.key == 'ArrowRight') {
-            rightPressed = false;
-        } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-            leftPressed = false;
-        }
+    function nextLevel() {
+        level += 1;
+    }
+    setInterval(nextLevel, 30000);
+
+    function drawTimer() {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Time ' + timer, 8, 40);
     }
 
-    function mouseMoveHandler(e) {
-        let relativeX = e.clientX - canvas.offsetLeft;
-        if (relativeX > 0 && relativeX < canvas.width) {
-            ratX = relativeX - ratGirth/2;
-        }
+    function timerTick() {
+        timer -= 1;
+    }
+
+    setInterval(timerTick, 1000);
+
+    function drawPizzaLives () {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Pizzas ' + pizzaLives, 8, 60);
+    }
+
+    function drawPizzaScore() {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Pizzas eaten ' + pizzaScore, 8, 80);
     }
 
     function drawMarkers() {
@@ -47,25 +119,57 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.closePath();
     }
 
-    function drawRat() {
-        ctx.beginPath();
-        ctx.arc(ratX, ratY, ratGirth, 0, Math.PI * 2);
-        ctx.fillStyle = '#b2b2b2';
-        ctx.fill();
-        ctx.closePath();
+    function getRandomNum(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    let pigeonRecruits = 10;
+    let pigeonArmy = [];
+    for (let i = 0; i < lastLevel; i++) {
+        
+        let pigeonPlatoon = [];
+
+        if (pigeonRecruits < 65) {
+            for (let j = 0; j < pigeonRecruits; j++) {
+                let randomPos = getRandomNum(0,pigeonStartingPositions.length-1);
+                let givenPigeonStartingPosition = pigeonStartingPositions[randomPos];
+        
+                pigeonPlatoon.push(new Pigeon(canvas, ctx, givenPigeonStartingPosition));
+            }
+        }
+
+        pigeonRecruits += 5;
+        pigeonArmy.push(pigeonPlatoon);
     }
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawRat();
-
         drawMarkers();
 
-        if (rightPressed && ratX < canvas.width - ratGirth) {
-            ratX += 7;
-        } else if (leftPressed && ratX - ratGirth > 0) {
-            ratX -= 7;
+        drawLevel();
+        drawTimer();
+        drawPizzaLives();
+        drawPizzaScore();
+
+        luckyRat.drawRat();
+        luckyRat.ratMovement();
+
+        if (timer <= 0) {
+            timer = 30;
+            pizzaScore += pizzaLives;
+            pizzaLives = 3;
+            pigeonRecruits += 10;
         }
+
+        let platoon = pigeonArmy[level-1];
+        for (let j = 0; j < platoon.length; j++) {
+            let pigeon = platoon[j];
+            pigeon.drawPigeon();
+            setTimeout(pigeon.pigeonFly.bind(pigeon), 650 * j * 30/platoon.length);
+        }   
+
         requestAnimationFrame(draw);
     }
 
