@@ -10,14 +10,15 @@ class Pigeon {
         this.pigeonBottomY = pigeonStartingPosition.pigeonBottomY;
         this.pigeonTopY = pigeonStartingPosition.pigeonTopY;
 
-        this.dxPigeon = 2;
-        this.dyPigeon = 1;
+        this.dxPigeon = pigeonStartingPosition.dxPigeon;
+        this.dyPigeon = pigeonStartingPosition.dyPigeon;
 
         this.pigeonFly = this.pigeonFly.bind(this);
+
+        // this.droppings = makeDroppings();
     }
 
     drawPigeon() {
-        // debugger
         this.ctx.beginPath();
         this.ctx.moveTo(this.pigeonLeftX, this.pigeonBottomY);
         this.ctx.lineTo(this.pigeonRightX, this.pigeonBottomY);
@@ -40,16 +41,7 @@ class Pigeon {
         } else if (this.pigeonTopY < this.pigeonStartingPosition.pigeonTopY-10) {
             this.dyPigeon = -this.dyPigeon;
         }
-    
-        // if (this.pigeonLeftX > this.canvas.width) {
-        //     this.pigeonLeftX = this.pigeonStartingPosition.pigeonLeftX;
-        //     this.pigeonMidX = this.pigeonStartingPosition.pigeonMidX;
-        //     this.pigeonRightX = this.pigeonStartingPosition.pigeonRightX;
-        //     this.pigeonBottomY = this.pigeonStartingPosition.pigeonBottomY;
-        //     this.pigeonTopY = this.pigeonStartingPosition.pigeonTopY;
-        // }
     }
-
 }
 
 export default Pigeon;

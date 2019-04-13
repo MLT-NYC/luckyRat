@@ -1,3 +1,4 @@
+import Dropping from './dropping';
 import Pigeon from './pigeon';
 import Rat from './rat';
 
@@ -5,69 +6,110 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
     const luckyRat = new Rat(canvas, ctx);
-
-    let level = 1;
-    let lastLevel = 13;
-    let timer = 30;
-    let pizzaLives = 3;
-    let pizzaScore = 0;
     
-
     const pigeonStartingPositions = [
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
+            pigeonBottomY: 80,
+            pigeonTopY: 60,
+            dxPigeon: 2,
+            dyPigeon: 0.5,
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
             pigeonBottomY: 120,
-            pigeonTopY: 100
+            pigeonTopY: 100,
+            dxPigeon: 1.5,
+            dyPigeon: 0.5,
         },
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
             pigeonBottomY: 140,
-            pigeonTopY: 120
+            pigeonTopY: 120,
+            dxPigeon: 2,
+            dyPigeon: 1.5,
         },
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
             pigeonBottomY: 160,
-            pigeonTopY: 140
-        },
-        {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
-            pigeonBottomY: 170,
-            pigeonTopY: 150
+            pigeonTopY: 140,
+            dxPigeon: 1.6,
+            dyPigeon: 1,
         },
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
             pigeonBottomY: 200,
-            pigeonTopY: 180
+            pigeonTopY: 180,
+            dxPigeon: 1.5,
+            dyPigeon: 0.5,
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 390,
+            pigeonTopY: 370,
+            dxPigeon: 1.75,
+            dyPigeon: 1.25,
+
+        },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 240,
+            pigeonTopY: 220,
+            dxPigeon: 1.6,
+            dyPigeon: 0.5,
             
         },
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
-            pigeonBottomY: 80,
-            pigeonTopY: 60
+            pigeonBottomY: 490,
+            pigeonTopY: 470,
+            dxPigeon: 1.75,
+            dyPigeon: 1.5,
 
         },
         {
             pigeonLeftX: -50,
             pigeonMidX: -25,
             pigeonRightX: 0,
-            pigeonBottomY: 180,
-            pigeonTopY: 160
+            pigeonBottomY: 290,
+            pigeonTopY: 270,
+            dxPigeon: 1,
+            dyPigeon: 0.5,
 
         },
+        {
+            pigeonLeftX: -50,
+            pigeonMidX: -25,
+            pigeonRightX: 0,
+            pigeonBottomY: 500,
+            pigeonTopY: 480,
+            dxPigeon: 1.75,
+            dyPigeon: 1.1,
 
+        },
     ];
+
+    let level = 1;
+    let lastLevel = 13;
+    let timer = 30;
+    let pizzaLives = 3;
+    let pizzaScore = 0;
 
     document.addEventListener('keydown', luckyRat.keyDownHandler, false);
     document.addEventListener('keyup', luckyRat.keyUpHandler, false);
@@ -125,23 +167,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    let pigeonRecruits = 10;
+    let pigeonRecruits = 5;
     let pigeonArmy = [];
+    let pigeonTotalAmmo = [];
     for (let i = 0; i < lastLevel; i++) {
-        
         let pigeonPlatoon = [];
+        let pigeonLevelAmmo = [];
 
         if (pigeonRecruits < 65) {
             for (let j = 0; j < pigeonRecruits; j++) {
-                let randomPos = getRandomNum(0,pigeonStartingPositions.length-1);
+                let randomPos = getRandomNum(0,pigeonStartingPositions.length);
                 let givenPigeonStartingPosition = pigeonStartingPositions[randomPos];
         
                 pigeonPlatoon.push(new Pigeon(canvas, ctx, givenPigeonStartingPosition));
+                pigeonLevelAmmo.push(new Dropping(canvas, ctx));
             }
         }
 
-        pigeonRecruits += 5;
+        pigeonRecruits += 3;
         pigeonArmy.push(pigeonPlatoon);
+        pigeonTotalAmmo.push(pigeonLevelAmmo);
     }
 
     function draw() {
@@ -164,10 +209,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let platoon = pigeonArmy[level-1];
+        let pigeonLevelAmmo = pigeonTotalAmmo[level-1]
         for (let j = 0; j < platoon.length; j++) {
             let pigeon = platoon[j];
+            let dropping = pigeonLevelAmmo[j];
+
             pigeon.drawPigeon();
             setTimeout(pigeon.pigeonFly.bind(pigeon), 650 * j * 30/platoon.length);
+
+            if (pigeon.pigeonBottomY === 90 || 
+                pigeon.pigeonBottomY === 130 || 
+                pigeon.pigeonBottomY === 150 || 
+                pigeon.pigeonBottomY === 170 ||
+                pigeon.pigeonBottomY === 210 ||
+                pigeon.pigeonBottomY === 250 ||
+                pigeon.pigeonBottomY === 300 ||
+                pigeon.pigeonBottomY === 400 ||
+                pigeon.pigeonBottomY === 500 ||
+                pigeon.pigeonBottomY === 510) {
+
+                dropping.makeDropping(pigeon.pigeonMidX, pigeon.pigeonBottomY);
+                    
+
+                setTimeout(dropping.pigeonFall, 650 * j * 30 / platoon.length);
+            }
+            // dropping.droppingFall();
+
         }   
 
         requestAnimationFrame(draw);
