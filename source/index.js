@@ -9,100 +9,113 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const pigeonStartingPositions = [
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
-            pigeonBottomY: 80,
-            pigeonTopY: 60,
-            dxPigeon: 2,
-            dyPigeon: 0.5,
-        },
-        {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 120,
             pigeonTopY: 100,
-            dxPigeon: 1.5,
+            dxPigeon: 2,
             dyPigeon: 0.5,
+            initialDropX: -20
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 140,
             pigeonTopY: 120,
             dxPigeon: 2,
             dyPigeon: 1.5,
+            initialDropX: -18
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 160,
             pigeonTopY: 140,
-            dxPigeon: 1.6,
-            dyPigeon: 1,
+            dxPigeon: 2,
+            dyPigeon: 1.5,
+            initialDropX: -16
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
+            pigeonBottomY: 180,
+            pigeonTopY: 160,
+            dxPigeon: 2,
+            dyPigeon: 1,
+            initialDropX: -14
+        },
+        {
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 200,
             pigeonTopY: 180,
-            dxPigeon: 1.5,
+            dxPigeon: 2,
             dyPigeon: 0.5,
+            initialDropX: -12
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 390,
             pigeonTopY: 370,
-            dxPigeon: 1.75,
+            dxPigeon: 2,
             dyPigeon: 1.25,
-
+            initialDropX: -10
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 240,
             pigeonTopY: 220,
-            dxPigeon: 1.6,
+            dxPigeon: 2,
             dyPigeon: 0.5,
-            
+            initialDropX: -8
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 490,
             pigeonTopY: 470,
-            dxPigeon: 1.75,
+            dxPigeon: 2,
             dyPigeon: 1.5,
-
+            initialDropX: -6
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 290,
             pigeonTopY: 270,
-            dxPigeon: 1,
+            dxPigeon: 2,
             dyPigeon: 0.5,
-
+            initialDropX: -4
         },
         {
-            pigeonLeftX: -50,
-            pigeonMidX: -25,
-            pigeonRightX: 0,
+            pigeonLeftX: -51,
+            pigeonMidX: -26,
+            pigeonRightX: -1,
             pigeonBottomY: 500,
             pigeonTopY: 480,
-            dxPigeon: 1.75,
-            dyPigeon: 1.1,
-
+            dxPigeon: 2,
+            dyPigeon: 1,
+            initialDropX: -2
         },
+    ];
+
+    const pigeonColors = [
+        'rgb(255, 254, 84)',
+        'rgb(84, 184, 81)',
+        'rgb(38, 106, 246)',
+        'rgb(110, 33, 220)',
+        'rgb(193, 46, 195)'
     ];
 
     let level = 1;
@@ -110,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timer = 30;
     let pizzaLives = 3;
     let pizzaScore = 0;
-
+    
     document.addEventListener('keydown', luckyRat.keyDownHandler, false);
     document.addEventListener('keyup', luckyRat.keyUpHandler, false);
     document.addEventListener("mousemove", luckyRat.mouseMoveHandler, false);
@@ -150,16 +163,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillText('Pizzas eaten ' + pizzaScore, 8, 80);
     }
 
-    function drawMarkers() {
-        ctx.beginPath();
-        ctx.moveTo(450, 0);
-        ctx.lineTo(450, 600);
-        ctx.moveTo(0, 300);
-        ctx.lineTo(900, 300);
-        ctx.strokeStyle = '#FFFFFF';
-        ctx.stroke();
-        ctx.closePath();
-    }
+    // function drawMarkers() {
+    //     ctx.beginPath();
+    //     ctx.moveTo(450, 0);
+    //     ctx.lineTo(450, 600);
+    //     ctx.moveTo(0, 300);
+    //     ctx.lineTo(900, 300);
+    //     ctx.strokeStyle = '#FFFFFF';
+    //     ctx.stroke();
+    //     ctx.closePath();
+    // }
 
     function getRandomNum(min, max) {
         min = Math.ceil(min);
@@ -167,9 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    let pigeonRecruits = 5;
+    let pigeonRecruits = 10;
     let pigeonArmy = [];
     let pigeonTotalAmmo = [];
+    let topDroppingDY = 6;
     for (let i = 0; i < lastLevel; i++) {
         let pigeonPlatoon = [];
         let pigeonLevelAmmo = [];
@@ -178,9 +192,28 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let j = 0; j < pigeonRecruits; j++) {
                 let randomPos = getRandomNum(0,pigeonStartingPositions.length);
                 let givenPigeonStartingPosition = pigeonStartingPositions[randomPos];
+                let randomDroppingDY = getRandomNum(3, topDroppingDY);
         
-                pigeonPlatoon.push(new Pigeon(canvas, ctx, givenPigeonStartingPosition));
-                pigeonLevelAmmo.push(new Dropping(canvas, ctx));
+                let randomColorNum = getRandomNum(0, pigeonColors.length);
+                let pigeonColor = pigeonColors[randomColorNum];
+                pigeonPlatoon.push(
+                    new Pigeon(
+                        canvas, 
+                        ctx, 
+                        givenPigeonStartingPosition,
+                        pigeonColor
+                        )
+                    );
+
+                pigeonLevelAmmo.push(
+                    new Dropping(
+                        canvas, 
+                        ctx, 
+                        givenPigeonStartingPosition.pigeonMidX, 
+                        givenPigeonStartingPosition.pigeonBottomY,
+                        randomDroppingDY
+                        )
+                    );
             }
         }
 
@@ -189,53 +222,75 @@ document.addEventListener('DOMContentLoaded', () => {
         pigeonTotalAmmo.push(pigeonLevelAmmo);
     }
 
+    
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawMarkers();
-
+        
         drawLevel();
         drawTimer();
         drawPizzaLives();
         drawPizzaScore();
-
+        
         luckyRat.drawRat();
         luckyRat.ratMovement();
+        
+        
+        
+        
+        let platoon = pigeonArmy[level-1];
+        let pigeonLevelAmmo = pigeonTotalAmmo[level-1]
+        for (let j = 0; j < platoon.length; j++) {
+            let pigeon = platoon[j];
+            let dropping = pigeonLevelAmmo[j];
+            
+            pigeon.drawPigeon();
+            setTimeout(pigeon.pigeonFly.bind(pigeon), 650 * j * 30/platoon.length);
+            let pigeonPosX = pigeon.pigeonMidX;
+            let pigeonPosY = pigeon.pigeonBottomY;
+            if (pigeonPosX === pigeon.makeDropX) {
+                dropping.droppingPosReset(pigeonPosX, pigeonPosY);
+                pigeon.eatFeed();
+            }         
+            
+            if (pigeonPosX > 25 && dropping.status) {
+                dropping.drawDropping();
+                dropping.droppingFall();
+            }
+            
+            if (dropping.status === 1) {
+                if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth -15) {
+                    if (dropping.droppingX > luckyRat.ratX - 30 && dropping.droppingX < luckyRat.ratX + 30 && dropping.droppingY < luckyRat.ratY) {
+                        dropping.status = 0;
+                        pizzaLives--;
+                    }
+                }
+            }
+        }
 
         if (timer <= 0) {
             timer = 30;
             pizzaScore += pizzaLives;
             pizzaLives = 3;
             pigeonRecruits += 10;
+            topDroppingDY += 1;
+            luckyRat.ratColor = '#b2b2b2';
+        }
+        
+        if (pizzaLives === 0) {
+            alert(`Game Over! luckyRat ate ${pizzaScore} pizza slices.`);
+            document.location.reload();
+        } else if (level === 13 && timer === 0) {
+            alert(`You win! luckyRat ate ${pizzaScore} pizza slices. That's alot of slices!`);
+            document.location.reload();
         }
 
-        let platoon = pigeonArmy[level-1];
-        let pigeonLevelAmmo = pigeonTotalAmmo[level-1]
-        for (let j = 0; j < platoon.length; j++) {
-            let pigeon = platoon[j];
-            let dropping = pigeonLevelAmmo[j];
+        if (pizzaLives === 2) {
+            luckyRat.ratColor = 'rgb(235, 103, 62)';
+        }
 
-            pigeon.drawPigeon();
-            setTimeout(pigeon.pigeonFly.bind(pigeon), 650 * j * 30/platoon.length);
-
-            if (pigeon.pigeonBottomY === 90 || 
-                pigeon.pigeonBottomY === 130 || 
-                pigeon.pigeonBottomY === 150 || 
-                pigeon.pigeonBottomY === 170 ||
-                pigeon.pigeonBottomY === 210 ||
-                pigeon.pigeonBottomY === 250 ||
-                pigeon.pigeonBottomY === 300 ||
-                pigeon.pigeonBottomY === 400 ||
-                pigeon.pigeonBottomY === 500 ||
-                pigeon.pigeonBottomY === 510) {
-
-                dropping.makeDropping(pigeon.pigeonMidX, pigeon.pigeonBottomY);
-                    
-
-                setTimeout(dropping.pigeonFall, 650 * j * 30 / platoon.length);
-            }
-            // dropping.droppingFall();
-
-        }   
+        if (pizzaLives === 1) {
+            luckyRat.ratColor = 'rgb(223, 74, 63)';
+        }
 
         requestAnimationFrame(draw);
     }

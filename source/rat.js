@@ -10,6 +10,8 @@ class Rat {
         this.rightPressed = false;
         this.leftPressed = false;
 
+        this.ratColor = '#b2b2b2';
+
         this.keyDownHandler = this.keyDownHandler.bind(this);
         this.keyUpHandler = this.keyUpHandler.bind(this);
         this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
@@ -18,7 +20,7 @@ class Rat {
     drawRat() {
         this.ctx.beginPath();
         this.ctx.arc(this.ratX, this.ratY, this.ratGirth, 0, Math.PI * 2);
-        this.ctx.fillStyle = '#b2b2b2';
+        this.ctx.fillStyle = this.ratColor;
         this.ctx.fill();
         this.ctx.closePath();
     }
@@ -54,6 +56,14 @@ class Rat {
             this.ratX -= 7;
         }
     }
+
+    // ratChangeColor() {
+    //     this.ratColor = 'rgb(223, 74, 63)';
+    // }
+
+    // ratResetColor() {
+    //     this.ratColor = '#b2b2b2';
+    // }
 }
 
 export default Rat;
