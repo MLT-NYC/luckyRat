@@ -56,14 +56,6 @@ class Rat {
             this.ratX -= 7;
         }
     }
-
-    // ratChangeColor() {
-    //     this.ratColor = 'rgb(223, 74, 63)';
-    // }
-
-    // ratResetColor() {
-    //     this.ratColor = '#b2b2b2';
-    // }
 }
 
 export default Rat;
