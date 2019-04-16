@@ -50,7 +50,7 @@ class Rat {
     ratMovement() {
         if (this.rightPressed && this.ratX < this.canvas.width - this.ratGirth) {
             this.ratX += 7;
-        } else if (this.leftPressed && this.ratX - this.ratGirth > 0) {
+        } else if (this.leftPressed && this.ratX > 0) {
             this.ratX -= 7;
         }
     }
