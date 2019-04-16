@@ -3,14 +3,17 @@ class Rat {
         this.canvas = canvas;
         this.ctx = ctx;
 
-        this.ratGirth = 30;
+        this.ratGirth = 60;
         this.ratX = (canvas.width) / 2;
         this.ratY = (canvas.height - this.ratGirth);
 
         this.rightPressed = false;
         this.leftPressed = false;
 
-        this.ratColor = '#b2b2b2';
+        this.ratColor = 'rgb(178, 178, 178)';
+
+        this.ratImage = new Image();
+        this.ratImage.src = './images/rat.png';
 
         this.keyDownHandler = this.keyDownHandler.bind(this);
         this.keyUpHandler = this.keyUpHandler.bind(this);
@@ -18,11 +21,12 @@ class Rat {
     }
 
     drawRat() {
-        this.ctx.beginPath();
-        this.ctx.arc(this.ratX, this.ratY, this.ratGirth, 0, Math.PI * 2);
-        this.ctx.fillStyle = this.ratColor;
-        this.ctx.fill();
-        this.ctx.closePath();
+        // this.ctx.beginPath();
+        // this.ctx.arc(this.ratX, this.ratY, this.ratGirth, 0, Math.PI * 2);
+        // this.ctx.fillStyle = this.ratColor;
+        // this.ctx.fill();
+        this.ctx.drawImage(this.ratImage, 0, 0, 1000, 1000, this.ratX, this.ratY, 100, 100);
+        // this.ctx.closePath();
     }
 
     keyDownHandler(e) {

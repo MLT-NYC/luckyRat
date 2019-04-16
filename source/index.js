@@ -5,6 +5,9 @@ import Rat from './rat';
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
+    // const pizzaImage = new Image();
+    // pizzaImage.src = 'images/pixel-pizza.jpg';
+
     const luckyRat = new Rat(canvas, ctx);
     
     const pigeonStartingPositions = [
@@ -111,27 +114,49 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const pigeonColors = [
-        'rgb(255, 254, 84)',
-        'rgb(84, 184, 81)',
-        'rgb(38, 106, 246)',
-        'rgb(110, 33, 220)',
-        'rgb(193, 46, 195)'
+        'rgb(24, 20, 49)',
+        'rgb(38, 41, 71)',
+        'rgb(34, 83, 88)',
+        'rgb(50, 113, 85)',
+        'rgb(89, 191, 139)',
+        'rgb(181, 215, 123)',
+        'rgb(242, 193, 103)',
+        'rgb(222, 114, 72)',
+        'rgb(217, 50, 76)',
+        'rgb(148, 54, 92)',
+        'rgb(102, 21, 93)'
     ];
 
     let level = 1;
     let lastLevel = 13;
     let timer = 30;
-    let pizzaLives = 3;
+    let pizzaLives = 4;
     let pizzaScore = 0;
+    let pizzaRadians = 2;
+
+    function resetRatColor() {
+        luckyRat.ratColor = 'rgb(178, 178, 178)';
+    }
+    setInterval(resetRatColor, 200);
     
     document.addEventListener('keydown', luckyRat.keyDownHandler, false);
     document.addEventListener('keyup', luckyRat.keyUpHandler, false);
     document.addEventListener("mousemove", luckyRat.mouseMoveHandler, false);
 
+    function drawMarkers() {
+        ctx.beginPath();
+        ctx.moveTo(0, 300);
+        ctx.lineTo(900, 300);
+        ctx.moveTo(450, 0);
+        ctx.lineTo(450, 600);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
     function drawLevel() {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText('Level ' + level, 8, 20);
+        ctx.fillText('Level ' + level, 390, 20);
     }
 
     function nextLevel() {
@@ -142,37 +167,40 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawTimer() {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText('Time ' + timer, 8, 40);
+        ctx.fillText('Time ' + timer, 460, 20);
     }
 
     function timerTick() {
         timer -= 1;
     }
-
     setInterval(timerTick, 1000);
-
-    function drawPizzaLives () {
+    
+    function drawPizzaLivesTitle () {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText('Pizzas ' + pizzaLives, 8, 60);
+        ctx.fillText('Pizza Slices', 805, 20);
+    }
+    
+    function drawPizzaLives () {
+        ctx.beginPath();
+        ctx.arc(850, 45, 15, 0, Math.PI * pizzaRadians);
+        ctx.lineTo(850, 45);
+        ctx.fillStyle = 'rgb(248, 234, 62)';
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function drawPizzaScoreTitle() {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Slices Eaten', 8, 20);
     }
 
     function drawPizzaScore() {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText('Pizzas eaten ' + pizzaScore, 8, 80);
+        ctx.fillText(pizzaScore, 46, 40);
     }
-
-    // function drawMarkers() {
-    //     ctx.beginPath();
-    //     ctx.moveTo(450, 0);
-    //     ctx.lineTo(450, 600);
-    //     ctx.moveTo(0, 300);
-    //     ctx.lineTo(900, 300);
-    //     ctx.strokeStyle = '#FFFFFF';
-    //     ctx.stroke();
-    //     ctx.closePath();
-    // }
 
     function getRandomNum(min, max) {
         min = Math.ceil(min);
@@ -228,15 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         drawLevel();
         drawTimer();
+        drawPizzaLivesTitle();
         drawPizzaLives();
+        drawPizzaScoreTitle();
         drawPizzaScore();
+        // drawMarkers();
         
         luckyRat.drawRat();
         luckyRat.ratMovement();
-        
-        
-        
-        
+ 
         let platoon = pigeonArmy[level-1];
         let pigeonLevelAmmo = pigeonTotalAmmo[level-1]
         for (let j = 0; j < platoon.length; j++) {
@@ -258,10 +286,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if (dropping.status === 1) {
-                if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth -15) {
-                    if (dropping.droppingX > luckyRat.ratX - 30 && dropping.droppingX < luckyRat.ratX + 30 && dropping.droppingY < luckyRat.ratY) {
+                if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth) {
+                    if (dropping.droppingX > luckyRat.ratX  && dropping.droppingX < luckyRat.ratX + luckyRat.ratGirth && dropping.droppingY < luckyRat.ratY) {
                         dropping.status = 0;
+                        luckyRat.ratColor = 'rgb(215, 46, 32)';
                         pizzaLives--;
+                        pizzaRadians -= 0.5;
                     }
                 }
             }
@@ -273,23 +303,16 @@ document.addEventListener('DOMContentLoaded', () => {
             pizzaLives = 3;
             pigeonRecruits += 10;
             topDroppingDY += 1;
-            luckyRat.ratColor = '#b2b2b2';
         }
         
         if (pizzaLives === 0) {
             alert(`Game Over! luckyRat ate ${pizzaScore} pizza slices.`);
             document.location.reload();
-        } else if (level === 13 && timer === 0) {
+        } 
+        
+        if (level === 13 && timer === 0) {
             alert(`You win! luckyRat ate ${pizzaScore} pizza slices. That's alot of slices!`);
             document.location.reload();
-        }
-
-        if (pizzaLives === 2) {
-            luckyRat.ratColor = 'rgb(235, 103, 62)';
-        }
-
-        if (pizzaLives === 1) {
-            luckyRat.ratColor = 'rgb(223, 74, 63)';
         }
 
         requestAnimationFrame(draw);

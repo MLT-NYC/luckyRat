@@ -3,13 +3,32 @@
     margin:0;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-image: url("../images/brick-background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;  
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 48;
+    color: white; 
 }
 
 canvas { 
-    display: block; 
-    /* justify-content: center */
-    margin: 0 auto;
-    background: black;
+    background: rgb(78, 120, 255);
+    border: 5px solid rgb(210, 187, 167);
+    border-radius: 10px;
 }
