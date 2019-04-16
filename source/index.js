@@ -12,119 +12,75 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const pigeonStartingPositions = [
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 120,
-            pigeonTopY: 100,
+            pigeonX: -101,
+            pigeonY: 120,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -20
+            initialDropX: -11
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 140,
-            pigeonTopY: 120,
+            pigeonX: -101,
+            pigeonY: 140,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -18
+            initialDropX: -9
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 160,
-            pigeonTopY: 140,
+            pigeonX: -101,
+            pigeonY: 160,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -16
+            initialDropX: -7
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 180,
-            pigeonTopY: 160,
+            pigeonX: -101,
+            pigeonY: 180,
             dxPigeon: 2,
             dyPigeon: 1,
-            initialDropX: -14
+            initialDropX: -5
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 200,
-            pigeonTopY: 180,
+            pigeonX: -101,
+            pigeonY: 200,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -12
+            initialDropX: -3
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 390,
-            pigeonTopY: 370,
+            pigeonX: -101,
+            pigeonY: 390,
             dxPigeon: 2,
             dyPigeon: 1.25,
-            initialDropX: -10
+            initialDropX: -1
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 240,
-            pigeonTopY: 220,
+            pigeonX: -101,
+            pigeonY: 240,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -8
+            initialDropX: 1
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 490,
-            pigeonTopY: 470,
+            pigeonX: -101,
+            pigeonY: 490,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -6
+            initialDropX: -11
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 290,
-            pigeonTopY: 270,
+            pigeonX: -101,
+            pigeonY: 290,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -4
+            initialDropX: -3
         },
         {
-            pigeonLeftX: -51,
-            pigeonMidX: -26,
-            pigeonRightX: -1,
-            pigeonBottomY: 500,
-            pigeonTopY: 480,
+            pigeonX: -101,
+            pigeonY: 500,
             dxPigeon: 2,
             dyPigeon: 1,
-            initialDropX: -2
+            initialDropX: 1
         },
-    ];
-
-    const pigeonColors = [
-        'rgb(24, 20, 49)',
-        'rgb(38, 41, 71)',
-        'rgb(34, 83, 88)',
-        'rgb(50, 113, 85)',
-        'rgb(89, 191, 139)',
-        'rgb(181, 215, 123)',
-        'rgb(242, 193, 103)',
-        'rgb(222, 114, 72)',
-        'rgb(217, 50, 76)',
-        'rgb(148, 54, 92)',
-        'rgb(102, 21, 93)'
     ];
 
     let level = 1;
@@ -143,15 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keyup', luckyRat.keyUpHandler, false);
     document.addEventListener("mousemove", luckyRat.mouseMoveHandler, false);
 
-    function drawMarkers() {
-        ctx.beginPath();
-        ctx.moveTo(0, 300);
-        ctx.lineTo(900, 300);
-        ctx.moveTo(450, 0);
-        ctx.lineTo(450, 600);
-        ctx.stroke();
-        ctx.closePath();
-    }
+    // function drawMarkers() {
+    //     ctx.beginPath();
+    //     ctx.moveTo(0, 300);
+    //     ctx.lineTo(900, 300);
+    //     ctx.moveTo(450, 0);
+    //     ctx.lineTo(450, 600);
+    //     ctx.stroke();
+    //     ctx.closePath();
+    // }
 
     function drawLevel() {
         ctx.font = '16px Arial';
@@ -222,14 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 let givenPigeonStartingPosition = pigeonStartingPositions[randomPos];
                 let randomDroppingDY = getRandomNum(3, topDroppingDY);
         
-                let randomColorNum = getRandomNum(0, pigeonColors.length);
-                let pigeonColor = pigeonColors[randomColorNum];
                 pigeonPlatoon.push(
                     new Pigeon(
                         canvas, 
                         ctx, 
-                        givenPigeonStartingPosition,
-                        pigeonColor
+                        givenPigeonStartingPosition
                         )
                     );
 
@@ -237,8 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     new Dropping(
                         canvas, 
                         ctx, 
-                        givenPigeonStartingPosition.pigeonMidX, 
-                        givenPigeonStartingPosition.pigeonBottomY,
+                        givenPigeonStartingPosition.pigeonX, 
+                        givenPigeonStartingPosition.pigeonY,
                         randomDroppingDY
                         )
                     );
@@ -273,8 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             pigeon.drawPigeon();
             setTimeout(pigeon.pigeonFly.bind(pigeon), 650 * j * 30/platoon.length);
-            let pigeonPosX = pigeon.pigeonMidX;
-            let pigeonPosY = pigeon.pigeonBottomY;
+
+            let pigeonPosX = pigeon.pigeonX;
+            let pigeonPosY = pigeon.pigeonY;
             if (pigeonPosX === pigeon.makeDropX) {
                 dropping.droppingPosReset(pigeonPosX, pigeonPosY);
                 pigeon.eatFeed();

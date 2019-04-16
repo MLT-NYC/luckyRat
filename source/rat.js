@@ -21,12 +21,7 @@ class Rat {
     }
 
     drawRat() {
-        // this.ctx.beginPath();
-        // this.ctx.arc(this.ratX, this.ratY, this.ratGirth, 0, Math.PI * 2);
-        // this.ctx.fillStyle = this.ratColor;
-        // this.ctx.fill();
         this.ctx.drawImage(this.ratImage, 0, 0, 1000, 1000, this.ratX, this.ratY, 100, 100);
-        // this.ctx.closePath();
     }
 
     keyDownHandler(e) {
@@ -46,7 +41,6 @@ class Rat {
     }
 
     mouseMoveHandler(e) {
-        // debugger
         let relativeX = e.clientX - this.canvas.offsetLeft;
         if (relativeX > 0 && relativeX < this.canvas.width) {
             this.ratX = relativeX - this.ratGirth/2;

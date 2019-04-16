@@ -4,8 +4,8 @@ class Dropping {
         this.ctx = ctx;
 
         this.droppingSize = 3;
-        this.droppingX = droppingX;
-        this.droppingY = droppingY;
+        this.droppingX = droppingX + 55;
+        this.droppingY = droppingY + 65;
 
         this.dxDropping = 2;
         this.dyDropping = randomDroppingDY;
@@ -29,8 +29,8 @@ class Dropping {
     }
 
     droppingPosReset(droppingX, droppingY) {
-        this.droppingX = droppingX;
-        this.droppingY = droppingY;
+        this.droppingX = droppingX + 45;
+        this.droppingY = droppingY + 65;
     }
 }
 

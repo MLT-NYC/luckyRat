@@ -4,51 +4,39 @@ class Pigeon {
         this.ctx = ctx;
         this.pigeonStartingPosition = pigeonStartingPosition;
 
-        this.pigeonLeftX = pigeonStartingPosition.pigeonLeftX;
-        this.pigeonMidX = pigeonStartingPosition.pigeonMidX;
-        this.pigeonRightX = pigeonStartingPosition.pigeonRightX;
-        this.pigeonBottomY = pigeonStartingPosition.pigeonBottomY;
-        this.pigeonTopY = pigeonStartingPosition.pigeonTopY;
+        this.pigeonX = pigeonStartingPosition.pigeonX;
+        this.pigeonY = pigeonStartingPosition.pigeonY;
         this.dxPigeon = pigeonStartingPosition.dxPigeon;
         this.dyPigeon = pigeonStartingPosition.dyPigeon;
 
         this.makeDropX = pigeonStartingPosition.initialDropX;
-        // this.makeDropX = pigeonStartingPosition.pigeonLeftX;
 
         this.pigeonColor = pigeonColor;
+
+        this.pigeonImage = new Image();
+        this.pigeonImage.src = './images/pigeon.png';
 
         this.pigeonFly = this.pigeonFly.bind(this);
     }
 
     drawPigeon() {
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.pigeonLeftX, this.pigeonBottomY);
-        this.ctx.lineTo(this.pigeonRightX, this.pigeonBottomY);
-        this.ctx.lineTo(this.pigeonMidX, this.pigeonTopY);
-        this.ctx.fillStyle = this.pigeonColor;
-        this.ctx.fill();
-        this.ctx.closePath();
+        this.ctx.drawImage(this.pigeonImage, 0, 0, 1000, 1000, this.pigeonX, this.pigeonY, 100, 100);
     }
 
     pigeonFly() {
-        this.pigeonLeftX += this.dxPigeon;
-        this.pigeonMidX += this.dxPigeon;
-        this.pigeonRightX += this.dxPigeon;
+        this.pigeonX += this.dxPigeon;
 
-        this.pigeonBottomY += this.dyPigeon;
-        this.pigeonTopY += this.dyPigeon;
+        this.pigeonY += this.dyPigeon;
 
-        if(this.pigeonTopY > this.pigeonStartingPosition.pigeonTopY+10) {
+        if (this.pigeonY > this.pigeonStartingPosition.pigeonY + 10) {
             this.dyPigeon = -this.dyPigeon;
-        } else if (this.pigeonTopY < this.pigeonStartingPosition.pigeonTopY-10) {
+        } else if (this.pigeonY < this.pigeonStartingPosition.pigeonY - 10) {
             this.dyPigeon = -this.dyPigeon;
         }
     }
 
     eatFeed(){
-        // debugger
         this.makeDropX += 350;
-        // debugger
     }
 }
 
