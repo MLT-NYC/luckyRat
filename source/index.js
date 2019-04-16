@@ -16,70 +16,70 @@ document.addEventListener('DOMContentLoaded', () => {
             pigeonY: 120,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -11
+            initialDropX: -71
         },
         {
             pigeonX: -101,
             pigeonY: 140,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -9
+            initialDropX: -69
         },
         {
             pigeonX: -101,
             pigeonY: 160,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -7
+            initialDropX: -67
         },
         {
             pigeonX: -101,
             pigeonY: 180,
             dxPigeon: 2,
             dyPigeon: 1,
-            initialDropX: -5
+            initialDropX: -65
         },
         {
             pigeonX: -101,
             pigeonY: 200,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -3
+            initialDropX: -63
         },
         {
             pigeonX: -101,
-            pigeonY: 390,
+            pigeonY: 370,
             dxPigeon: 2,
             dyPigeon: 1.25,
-            initialDropX: -1
+            initialDropX: -61
         },
         {
             pigeonX: -101,
             pigeonY: 240,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: 1
+            initialDropX: -59
         },
         {
             pigeonX: -101,
-            pigeonY: 490,
+            pigeonY: 390,
             dxPigeon: 2,
             dyPigeon: 1.5,
-            initialDropX: -11
+            initialDropX: -57
         },
         {
             pigeonX: -101,
             pigeonY: 290,
             dxPigeon: 2,
             dyPigeon: 0.5,
-            initialDropX: -3
+            initialDropX: -55
         },
         {
             pigeonX: -101,
-            pigeonY: 500,
+            pigeonY: 400,
             dxPigeon: 2,
             dyPigeon: 1,
-            initialDropX: 1
+            initialDropX: -53
         },
     ];
 
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pigeon.eatFeed();
             }         
             
-            if (pigeonPosX > 25 && dropping.status) {
+            if (pigeonPosX > 0 && dropping.status) {
                 dropping.drawDropping();
                 dropping.droppingFall();
             }
