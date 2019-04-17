@@ -5,10 +5,13 @@ import Rat from './rat';
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
-    // const pizzaImage = new Image();
-    // pizzaImage.src = 'images/pixel-pizza.jpg';
-
     const luckyRat = new Rat(canvas, ctx);
+    let level = 1;
+    let lastLevel = 13;
+    let timer = 30;
+    let pizzaLives = 4;
+    let pizzaScore = 0;
+    let pizzaRadians = 2;
     
     const pigeonStartingPositions = [
         {
@@ -82,18 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             initialDropX: -53
         },
     ];
-
-    let level = 1;
-    let lastLevel = 13;
-    let timer = 30;
-    let pizzaLives = 4;
-    let pizzaScore = 0;
-    let pizzaRadians = 2;
-
-    function resetRatColor() {
-        luckyRat.ratColor = 'rgb(178, 178, 178)';
-    }
-    setInterval(resetRatColor, 200);
     
     document.addEventListener('keydown', luckyRat.keyDownHandler, false);
     document.addEventListener('keyup', luckyRat.keyUpHandler, false);
@@ -136,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#FFFFFF';
         ctx.fillText('Pizza Slices', 805, 20);
     }
-    
+
     function drawPizzaLives () {
         ctx.beginPath();
         ctx.arc(850, 45, 15, 0, Math.PI * pizzaRadians);
@@ -155,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawPizzaScore() {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText(pizzaScore, 46, 40);
+        ctx.fillText(pizzaScore, 46, 45);
     }
 
     function getRandomNum(min, max) {
@@ -167,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let pigeonRecruits = 10;
     let pigeonArmy = [];
     let pigeonTotalAmmo = [];
-    let topDroppingDY = 6;
+    let maxDroppingDY = 6;
     for (let i = 0; i < lastLevel; i++) {
         let pigeonPlatoon = [];
         let pigeonLevelAmmo = [];
@@ -176,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let j = 0; j < pigeonRecruits; j++) {
                 let randomPos = getRandomNum(0,pigeonStartingPositions.length);
                 let givenPigeonStartingPosition = pigeonStartingPositions[randomPos];
-                let randomDroppingDY = getRandomNum(3, topDroppingDY);
+                let randomDroppingDY = getRandomNum(3, maxDroppingDY);
         
                 pigeonPlatoon.push(
                     new Pigeon(
@@ -219,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         luckyRat.ratMovement();
  
         let platoon = pigeonArmy[level-1];
-        let pigeonLevelAmmo = pigeonTotalAmmo[level-1]
+        let pigeonLevelAmmo = pigeonTotalAmmo[level-1];
         for (let j = 0; j < platoon.length; j++) {
             let pigeon = platoon[j];
             let dropping = pigeonLevelAmmo[j];
@@ -241,9 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (dropping.status === 1) {
                 if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth) {
-                    if (dropping.droppingX > luckyRat.ratX  && dropping.droppingX < luckyRat.ratX + luckyRat.ratGirth && dropping.droppingY < luckyRat.ratY) {
+                    if (dropping.droppingX > luckyRat.ratX  
+                        && dropping.droppingX < luckyRat.ratX + luckyRat.ratGirth 
+                        && dropping.droppingY < luckyRat.ratY + 100) {
                         dropping.status = 0;
-                        luckyRat.ratColor = 'rgb(215, 46, 32)';
                         pizzaLives--;
                         pizzaRadians -= 0.5;
                     }
@@ -256,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pizzaScore += pizzaLives;
             pizzaLives = 3;
             pigeonRecruits += 10;
-            topDroppingDY += 1;
+            maxDroppingDY += 1;
         }
         
         if (pizzaLives === 0) {

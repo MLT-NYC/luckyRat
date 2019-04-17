@@ -47,13 +47,13 @@ This project will be implemented with the following technologies:
 
 In addition to the webpack entry file, there will be four scripts involved in this project:
 
-`board.js`: this script will handle the logic for creating and updating the necessary DOM elements.
+`index.js`: this script will handle the logic for creating and updating the necessary DOM elements.
 
-`luckyRayPhysics.js`: this script will house the physics logic for luckyRat.
+`rat.js`: this script will house the physics logic for luckyRat.
 
-`pigeonPhysics.js`: this script will house the physics logic for pigeons.
+`pigeon.js`: this script will house the physics logic for pigeons.
 
-`droppingsPhysics.js`: this script will house the physics logic for the droppings.
+`dropping.js`: this script will house the physics logic for the droppings.
 
 ### Implementation Timeline
 
