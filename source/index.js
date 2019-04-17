@@ -6,11 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
     const luckyRat = new Rat(canvas, ctx);
-    
+
     let gameBoolean = true;
-    let play = document.getElementsByClassName('play')[0];
-    play.addEventListener('click', () => {
+    let playButton = document.getElementsByClassName('playButton')[0];
+    playButton.addEventListener('click', () => {
         draw();
+    });
+
+    let restartButton = document.getElementsByClassName('restartButton')[0];
+    restartButton.addEventListener('click', () => {
+        document.location.reload();
     });
 
     let level = 1;
