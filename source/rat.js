@@ -10,8 +10,6 @@ class Rat {
         this.rightPressed = false;
         this.leftPressed = false;
 
-        this.ratColor = 'rgb(178, 178, 178)';
-
         this.ratImage = new Image();
         this.ratImage.src = './images/rat.png';
 

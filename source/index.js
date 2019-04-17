@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rootCanvas');
     const ctx = canvas.getContext('2d');
     const luckyRat = new Rat(canvas, ctx);
+    
+    let gameBoolean = true;
+    let play = document.getElementsByClassName('play')[0];
+    play.addEventListener('click', () => {
+        draw();
+    });
+
     let level = 1;
     let lastLevel = 13;
     let timer = 30;
@@ -225,14 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 pigeon.eatFeed();
             }         
             
-            if (pigeonPosX > 0 && dropping.status) {
+            if (pigeonPosX > -25 && dropping.status) {
                 dropping.drawDropping();
                 dropping.droppingFall();
             }
             
             if (dropping.status === 1) {
-                if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth) {
-                    if (dropping.droppingX > luckyRat.ratX  
+                if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth/1.5) {
+                    if (dropping.droppingX > luckyRat.ratX + 10
                         && dropping.droppingX < luckyRat.ratX + luckyRat.ratGirth 
                         && dropping.droppingY < luckyRat.ratY + 100) {
                         dropping.status = 0;
@@ -252,17 +259,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (pizzaLives === 0) {
-            alert(`Game Over! luckyRat ate ${pizzaScore} pizza slices.`);
-            document.location.reload();
+            if (gameBoolean) {
+                gameBoolean = false;
+                alert(`Game Over! luckyRat ate ${pizzaScore} pizza slices.`);
+                document.location.reload();
+            }
         } 
         
-        if (level === 13 && timer === 0) {
-            alert(`You win! luckyRat ate ${pizzaScore} pizza slices. That's alot of slices!`);
-            document.location.reload();
+        if (gameBoolean) {
+            if (level === 13 && timer === 0) {
+                alert(`You win! luckyRat ate ${pizzaScore} pizza slices. That's alot of slices!`);
+                document.location.reload();
+            }
         }
 
         requestAnimationFrame(draw);
     }
 
-    draw();
+            // draw();
 });

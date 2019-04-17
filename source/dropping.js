@@ -4,8 +4,8 @@ class Dropping {
         this.ctx = ctx;
 
         this.droppingSize = 3;
-        this.droppingX = droppingX + 55;
-        this.droppingY = droppingY + 65;
+        this.droppingX = droppingX;
+        this.droppingY = droppingY;
 
         this.dxDropping = 2;
         this.dyDropping = randomDroppingDY;
