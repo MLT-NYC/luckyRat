@@ -12,7 +12,7 @@ The game has 13 levels, with each level lasting 30 seconds. Pizza slices remaini
 
 In luckyRat, users will be able to:
 
-- [ ] Start, pause, and reset the game board
+- [ ] Start and reset the game board
 - [ ] Move luckyRat side-to-side
 
 Pigeons will be able to:

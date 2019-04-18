@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let playButton = document.getElementsByClassName('playButton')[0];
     playButton.addEventListener('click', () => {
         draw();
+        playButton.style.visibility='hidden';
+        restartButton.style.visibility = 'visible';
     });
 
     let restartButton = document.getElementsByClassName('restartButton')[0];
+    restartButton.style.visibility='hidden';
     restartButton.addEventListener('click', () => {
         document.location.reload();
     });
@@ -244,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (dropping.status === 1) {
                 if (dropping.droppingY + dropping.dyDropping > canvas.height - luckyRat.ratGirth/1.5) {
-                    if (dropping.droppingX > luckyRat.ratX + 10
+                    if (dropping.droppingX > luckyRat.ratX + luckyRat.ratGirth/2
                         && dropping.droppingX < luckyRat.ratX + luckyRat.ratGirth 
                         && dropping.droppingY < luckyRat.ratY + 100) {
                         dropping.status = 0;
@@ -258,7 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (timer <= 0) {
             timer = 30;
             pizzaScore += pizzaLives;
-            pizzaLives = 3;
+            pizzaLives = 4;
+            pizzaRadians = 2;
             pigeonRecruits += 10;
             maxDroppingDY += 1;
         }
