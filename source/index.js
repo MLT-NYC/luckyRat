@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const luckyRat = new Rat(canvas, ctx);
 
     let gameBoolean = true;
+    let billboard = document.getElementsByClassName('billboard')[0];
+    let billboardInstructions = document.getElementsByClassName('billboardInstructions')[0];
     let playButton = document.getElementsByClassName('playButton')[0];
     playButton.addEventListener('click', () => {
         draw();
-        playButton.style.visibility='hidden';
+        playButton.style.visibility = 'hidden';
+        billboard.style.visibility = 'hidden';
+        billboardInstructions.style.visibility = 'hidden';
         restartButton.style.visibility = 'visible';
     });
 

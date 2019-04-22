@@ -3,6 +3,16 @@
     src: url(../fonts/adrip1.ttf)
 }
 
+@font-face {
+    font-family: marker;
+    src: url(../fonts/freshmarker.ttf)
+}
+
+@font-face {
+    font-family: bubblePlay;
+    src: url(../fonts/PoliticalFill.TTF)
+}
+
 * { 
     padding: 0; 
     margin:0;
@@ -43,19 +53,92 @@ body {
 .signature {
     font-family: graffiti;
     font-size: 36px;
-    color: black
+    color: black;
 }
 
 canvas { 
     background: rgb(78, 120, 255);
     border: 5px solid rgb(210, 187, 167);
     border-radius: 10px;
+    /* margin-bottom: 50px; */
+}
+
+.billboard {
+    position: absolute;
+    margin-top: 110px;
+    /* height: 111px; */
+    width: 500px;
+}
+
+.billboard img {
+    width: 100%;
+    height: auto;
+}
+
+.billboardInstructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: -75px;
+    padding: 10px;
+    width: 480px;
+    /* border: 1px solid red; */
+    z-index: 1;
+}
+
+.billboardInstructions p{
+    padding: 5px;
+    font-family: marker;
+    font-size: 20px;
+}
+.p1 {
+    color: red;
+}
+
+.p2 {
+    color: green;
+}
+
+.p3 {
+    color: orange;
 }
 
 .playButton {
     position: absolute;
+    margin-top: 32px;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-decoration: none;
+    padding: 5px 0px 0px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: 100px;
+    font-size: 24px;
+    background-color: black;
+}
+
+.playButton:hover {
+    background-color: rgb(78, 120, 255);
+    cursor: pointer;
 }
 
 .restartButton {
-    /* position: absolute; */
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-decoration: none;
+    padding: 7px 0px 5px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: 100px;
+    font-size: 18px;
+    background-color: black;
+}
+
+.restartButton:hover {
+    background-color: rgb(78, 120, 255);
+    cursor: pointer;
 }
