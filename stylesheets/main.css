@@ -1,3 +1,8 @@
+@font-face {
+    font-family: graffiti;
+    src: url(../fonts/adrip1.ttf)
+}
+
 * { 
     padding: 0; 
     margin:0;
@@ -30,15 +35,15 @@ body {
 }
 
 .title {
-    font-family: Arial, Helvetica, sans-serif;
-    /* font-size: 48; */
+    font-family: graffiti;
+    font-size: 100px;
     color: white; 
 }
 
 .signature {
-    font-family: Arial, Helvetica, sans-serif;
-    /* font-size: 24; */
-    color: white; 
+    font-family: graffiti;
+    font-size: 36px;
+    color: black
 }
 
 canvas { 
