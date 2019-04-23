@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    let pigeonRecruits = 10;
+    let pigeonRecruits = 20;
     let pigeonArmy = [];
     let pigeonTotalAmmo = [];
     let maxDroppingDY = 6;

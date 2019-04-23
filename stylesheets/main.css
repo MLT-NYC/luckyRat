@@ -136,6 +136,7 @@ canvas {
     width: 100px;
     font-size: 18px;
     background-color: black;
+    trans
 }
 
 .restartButton:hover {
