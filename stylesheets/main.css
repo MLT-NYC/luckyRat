@@ -34,29 +34,33 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;  
+    /* background-size: cover; */
 }
 
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
     height: 100%;
 }
 
 .title {
+    /* position: absolute; */
     font-family: graffiti;
     font-size: 100px;
     color: white; 
 }
 
 .signature {
+    /* position: absolute; */
     font-family: graffiti;
     font-size: 36px;
     color: black;
 }
 
 canvas { 
+    /* position: relative; */
     background: rgb(78, 120, 255);
     border: 5px solid rgb(210, 187, 167);
     border-radius: 10px;
@@ -64,10 +68,20 @@ canvas {
 }
 
 .billboard {
-    position: absolute;
-    margin-top: 110px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-top: -100px; */
+    /* margin-bottom: 50%; */
     /* height: 111px; */
+    /* margin-top: -300px; */
+    /* top: 50% + 1px; */
+    top: -501px;
+    left: 50% - 250px;
+    /* border: 1px solid red; */
     width: 500px;
+    z-index: 5;
 }
 
 .billboard img {
@@ -76,16 +90,16 @@ canvas {
 }
 
 .billboardInstructions {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    margin-top: -75px;
+    margin-top: 25px;
     padding: 10px;
     width: 480px;
     /* border: 1px solid red; */
-    z-index: 1;
+    z-index: 2;
 }
 
 .billboardInstructions p{
@@ -107,11 +121,11 @@ canvas {
 
 .playButton {
     position: absolute;
-    margin-top: 32px;
+    margin-top: 157px;
     border: none;
+    text-decoration: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    text-decoration: none;
     padding: 5px 0px 0px 0px;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
@@ -126,6 +140,7 @@ canvas {
 }
 
 .restartButton {
+    /* position: absolute; */
     border: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -136,7 +151,6 @@ canvas {
     width: 100px;
     font-size: 18px;
     background-color: black;
-    trans
 }
 
 .restartButton:hover {
