@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: chillffiti;
+    src: url(../fonts/nodrip1.ttf)
+}
+
+@font-face {
     font-family: marker;
     src: url(../fonts/freshmarker.ttf)
 }
@@ -11,6 +16,11 @@
 @font-face {
     font-family: bubblePlay;
     src: url(../fonts/PoliticalFill.TTF)
+}
+
+@font-face {
+    font-family: titleFont;
+    src: url(../fonts/titleFont.ttf)
 }
 
 * { 
@@ -34,37 +44,41 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;  
-    /* background-size: cover; */
 }
 
 .main {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     align-items: center;
     height: 100%;
 }
 
 .title {
-    /* position: absolute; */
+    display: flex;
+    flex-direction: row;
     font-family: graffiti;
-    font-size: 100px;
-    color: white; 
+    font-size: 75px;
 }
 
-.signature {
-    /* position: absolute; */
-    font-family: graffiti;
-    font-size: 36px;
+.lucky {
     color: black;
 }
 
+.rat {
+    color: white;
+}
+
+.signature {
+    font-family: marker;
+    font-size: 24px;
+    color: black;
+    margin-bottom: 30px;
+}
+
 canvas { 
-    /* position: relative; */
     background: rgb(78, 120, 255);
     border: 5px solid rgb(210, 187, 167);
     border-radius: 10px;
-    /* margin-bottom: 50px; */
 }
 
 .billboard {
@@ -72,16 +86,9 @@ canvas {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-top: -100px; */
-    /* margin-bottom: 50%; */
-    /* height: 111px; */
-    /* margin-top: -300px; */
-    /* top: 50% + 1px; */
     top: -501px;
     left: 50% - 250px;
-    /* border: 1px solid red; */
     width: 500px;
-    z-index: 5;
 }
 
 .billboard img {
@@ -98,8 +105,6 @@ canvas {
     margin-top: 25px;
     padding: 10px;
     width: 480px;
-    /* border: 1px solid red; */
-    z-index: 2;
 }
 
 .billboardInstructions p{
@@ -121,7 +126,7 @@ canvas {
 
 .playButton {
     position: absolute;
-    margin-top: 157px;
+    margin-top: 156px;
     border: none;
     text-decoration: none;
     border-top-left-radius: 5px;
@@ -132,6 +137,7 @@ canvas {
     width: 100px;
     font-size: 24px;
     background-color: black;
+    transition-duration: .5s;
 }
 
 .playButton:hover {
@@ -140,7 +146,6 @@ canvas {
 }
 
 .restartButton {
-    /* position: absolute; */
     border: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -151,9 +156,10 @@ canvas {
     width: 100px;
     font-size: 18px;
     background-color: black;
+    transition-duration: .5s;
 }
 
 .restartButton:hover {
-    background-color: rgb(78, 120, 255);
+    background-color: red;
     cursor: pointer;
 }
