@@ -137,7 +137,6 @@ canvas {
     width: 100px;
     font-size: 24px;
     background-color: black;
-    transition-duration: .5s;
 }
 
 .playButton:hover {

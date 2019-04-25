@@ -11,8 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let billboard = document.getElementsByClassName('billboard')[0];
     let billboardInstructions = document.getElementsByClassName('billboardInstructions')[0];
     let playButton = document.getElementsByClassName('playButton')[0];
+
     playButton.addEventListener('click', () => {
         draw();
+        setInterval(nextLevel, 30000);
+        setInterval(timerTick, 1000);
         playButton.style.visibility = 'hidden';
         billboard.style.visibility = 'hidden';
         billboardInstructions.style.visibility = 'hidden';
@@ -20,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let restartButton = document.getElementsByClassName('restartButton')[0];
+    
     restartButton.style.visibility='hidden';
     restartButton.addEventListener('click', () => {
         document.location.reload();
@@ -128,18 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function nextLevel() {
         level += 1;
     }
-    setInterval(nextLevel, 30000);
-
+    
     function drawTimer() {
         ctx.font = '16px Arial';
         ctx.fillStyle = '#FFFFFF';
         ctx.fillText('Time ' + timer, 460, 20);
     }
-
+    
     function timerTick() {
         timer -= 1;
     }
-    setInterval(timerTick, 1000);
     
     function drawPizzaLivesTitle () {
         ctx.font = '16px Arial';
@@ -212,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pigeonArmy.push(pigeonPlatoon);
         pigeonTotalAmmo.push(pigeonLevelAmmo);
     }
+
 
     
     function draw() {
